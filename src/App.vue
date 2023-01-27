@@ -1,11 +1,14 @@
 <template>
-  <TopBar/>
-  <router-view class="router-view"/>
+    <TopBar/>
+    <div class="router-view">
+      <router-view/>
+    </div>
 </template>
 
 <script>
 
 import TopBar from "@/components/TopBar";
+
 export default {
   name: 'App',
   components: {
@@ -19,9 +22,9 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+  width: 100%;
+  height: 100%;
 }
-
 body{
   margin: 0;
   padding: 0;
@@ -29,12 +32,14 @@ body{
   height: 100vh;
 }
 
-*{
+* {
   box-sizing: border-box;
 }
 
-.router-view{
+.router-view {
   padding: 18px;
+  height: 100%;
 }
+
 
 </style>

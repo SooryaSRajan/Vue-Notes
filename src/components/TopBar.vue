@@ -10,7 +10,7 @@
         <router-link class="routerLink" to="/update">Update</router-link>
       </div>
       <button class="drawer-button" @click="controlDrawer">
-        {{ isDrawerOpen ? "Close" : "Open" }}
+        <font-awesome-icon icon="bars" class="icon"/>
       </button>
     </div>
     <div class="nav-drawer">
@@ -35,11 +35,9 @@ export default {
       let drawer = document.getElementsByClassName("nav-drawer")[0]
 
       if (!this.isDrawerOpen) {
-        //TODO: CLOSE
         drawer.style.transform = "translate(0," + 0 + "px)"
 
       } else {
-        //TODO: OPEN
         drawer.style.transform = "translate(0,-" + drawer.clientHeight + "px)"
       }
 
@@ -51,7 +49,7 @@ export default {
 
 <style scoped>
 
-.nav-root{
+.nav-root {
   position: sticky;
   top: 0;
 }
@@ -67,6 +65,26 @@ export default {
   align-items: center;
   position: relative;
   z-index: 20;
+}
+
+.icon {
+  font-size: 25px;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  transition: 0.3s ease-in-out;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+button:hover {
+  cursor: pointer;
+  transform: rotate(180deg);
+  background-color: white;
+  color: black;
 }
 
 .title {
@@ -103,6 +121,8 @@ export default {
 }
 
 .nav-drawer {
+  position: fixed;
+  width: 100%;
   background-color: #525252;
   padding: 30px;
   flex-direction: column;
