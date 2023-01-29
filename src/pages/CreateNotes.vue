@@ -11,9 +11,8 @@
           :novalidate="true">
       <input type="text" placeholder="Note Title" :value="noteTitle"/>
       <textarea placeholder="Note" :value="note"/>
-      <input type="date" placeholder="Date" :value="dateParsed"/>
       <button type="submit">
-        Create Note
+        {{ updateNote ? "Update Note" : "Create Note" }}
       </button>
     </form>
   </div>
@@ -26,7 +25,6 @@ export default {
     return {
       updateNote: false,
       noteTitle: this.$route["query"].noteTitle ?? "",
-      date: this.$route["query"].date ?? "",
       note: this.$route["query"].note ?? "",
       id: this.$route["query"].id ?? "",
     }
@@ -36,17 +34,11 @@ export default {
       this.updateNote = true
     }
   },
-  computed: {
-    dateParsed() {
-      let date = this.date.split("/")
-      return date[2] + "-" + date[1] + "-" + date[0]
-    },
-  },
   methods: {
     pushNote(e) {
+      e.preventDefault();
       let noteTitle = e.target[0].value;
       let note = e.target[1].value;
-      let date = e.target[2].value;
 
       let error = false
 
@@ -66,24 +58,38 @@ export default {
         e.target[1].style.border = "none";
       }
 
-      if (date === "") {
-        e.target[2].style.border = "1px solid #ff0000";
-        error = true
-      } else {
-        e.target[2].style.border = "none";
-        let dateParsed = date.split("-")
-        date = dateParsed[2] + "/" + dateParsed[1] + "/" + dateParsed[0]
-      }
+      console.log(new Date().toLocaleDateString())
 
       if (!error) {
 
         if (this.updateNote) {
-          alert("Note Updated")
-          //TODO: Update using axios
+          this.axios.put("/notes/updateNote", {
+            noteTitle: noteTitle,
+            note: note,
+            id: this.id
+          }).then(() => {
+            alert("Note Updated")
+            this.$router.push({path: "/"})
+          }).catch((err) => {
+            alert("Error updating note: " + err)
+          })
 
         } else {
-          alert("Note Created")
-          //TODO: Create using axios
+
+          let date = new Date().toLocaleDateString()
+          date = date.split("/")
+          date = date[1] + "-" + date[0] + "-" + date[2]
+
+          this.axios.post("/notes/addNote", {
+            noteTitle: noteTitle,
+            note: note,
+            noteDate: date,
+          }).then(() => {
+            alert("Note Created")
+            this.$router.push({path: "/"})
+          }).catch((err) => {
+            alert("Error creating note: " + err)
+          })
 
         }
 

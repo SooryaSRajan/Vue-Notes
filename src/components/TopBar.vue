@@ -38,7 +38,7 @@ export default {
         drawer.style.transform = "translate(0," + 0 + "px)"
 
       } else {
-        drawer.style.transform = "translate(0,-" + drawer.clientHeight + "px)"
+        drawer.style.transform = "translate(0,-200%)"
       }
 
       this.isDrawerOpen = !this.isDrawerOpen
@@ -121,7 +121,6 @@ button:hover {
 }
 
 .nav-drawer {
-  position: fixed;
   width: 100%;
   background-color: #525252;
   padding: 30px;
@@ -138,22 +137,22 @@ button:hover {
 
 /*media screen*/
 @media screen and (max-width: 600px) {
-  .nav-row {
-    display: none;
-  }
+  /*.nav-row {*/
+  /*  display: none;*/
+  /*}*/
 
-  .nav-drawer {
-    display: flex;
-  }
+  /*.nav-drawer {*/
+  /*  display: flex;*/
+  /*}*/
 
-  .routerLink {
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
+  /*.routerLink {*/
+  /*  margin-top: 10px;*/
+  /*  margin-bottom: 10px;*/
+  /*}*/
 
-  .drawer-button {
-    display: block;
-  }
+  /*.drawer-button {*/
+  /*  display: block;*/
+  /*}*/
 }
 
 
