@@ -14,9 +14,9 @@
       </button>
     </div>
     <div class="nav-drawer">
-      <router-link class="routerLink" to="/">Home</router-link>
-      <router-link class="routerLink" to="/create">Create</router-link>
-      <router-link class="routerLink" to="/update">Update</router-link>
+      <router-link class="routerLink" to="/" @click="closeDrawer">Home</router-link>
+      <router-link class="routerLink" to="/create" @click="closeDrawer">Create</router-link>
+      <router-link class="routerLink" to="/update" @click="closeDrawer">Update</router-link>
     </div>
   </div>
 
@@ -31,6 +31,11 @@ export default {
     }
   },
   methods: {
+    closeDrawer() {
+      let drawer = document.getElementsByClassName("nav-drawer")[0]
+      drawer.style.transform = "translate(0,-200%)"
+      this.isDrawerOpen = false
+    },
     controlDrawer() {
       let drawer = document.getElementsByClassName("nav-drawer")[0]
 
@@ -137,22 +142,23 @@ button:hover {
 
 /*media screen*/
 @media screen and (max-width: 600px) {
-  /*.nav-row {*/
-  /*  display: none;*/
-  /*}*/
+  .nav-row {
+    display: none;
+  }
 
-  /*.nav-drawer {*/
-  /*  display: flex;*/
-  /*}*/
+  .nav-drawer {
+    display: flex;
+    position: fixed;
+  }
 
-  /*.routerLink {*/
-  /*  margin-top: 10px;*/
-  /*  margin-bottom: 10px;*/
-  /*}*/
+  .routerLink {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
 
-  /*.drawer-button {*/
-  /*  display: block;*/
-  /*}*/
+  .drawer-button {
+    display: block;
+  }
 }
 
 
